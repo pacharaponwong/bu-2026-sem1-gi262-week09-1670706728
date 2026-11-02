@@ -99,21 +99,76 @@ namespace Assignment
 
         public string ASN01_ReverseString(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+
+            foreach (char c in str)
+            {
+                stack.Push(c);
+            }
+
+            string reversed = "";
+
+            
+            while (stack.Count > 0)
+            {
+                reversed += stack.Pop();
+            }
+
+            return reversed;
         }
 
         public bool ASN02_StackPalindrome(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>(); 
+            foreach (char c in str)
+            {
+                stack.Push(c);
+            }
+
+            string reversed = "";
+            while (stack.Count > 0)
+            {
+                reversed += stack.Pop();
+            }
+
+            return str == reversed;
         }
 
         #endregion
-
         #region Extra
 
         public bool EX01_ParenthesesChecker(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+
+            // วนลูปแต่ละ character ใน str[cite: 2]
+            foreach (char c in str)
+            {
+                // ถ้าเป็น opening bracket ให้ Push เข้า Stack[cite: 2]
+                if (c == '(' || c == '[' || c == '{')
+                {
+                    stack.Push(c);
+                }
+                // ถ้าเป็น closing bracket[cite: 2]
+                else if (c == ')' || c == ']' || c == '}')
+                {
+                    // ถ้า Stack ว่าง ให้คืน false ทันที[cite: 2]
+                    if (stack.Count == 0)
+                    {
+                        return false;
+                    }
+
+                    // Pop และตรวจคู่ ถ้าคู่ไม่ตรงกันให้คืน false[cite: 2]
+                    char top = stack.Pop();
+                    if ((c == ')' && top != '(') ||
+                        (c == ']' && top != '[') ||
+                        (c == '}' && top != '{'))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return stack.Count == 0;
         }
 
         #endregion
